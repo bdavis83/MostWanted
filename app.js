@@ -140,12 +140,13 @@ function displayPeople(people) {
 function displayPerson(person) {
     let personInfo = `First Name: ${person.firstName}\n`;
     personInfo += `Last Name: ${person.lastName}\n`;
-    personInfo += `Gender: ${person.gender}\n`
-    personInfo += `DoB: ${person.dob}\n`
-    personInfo += `Height: ${person.height}\n`
-    personInfo += `Weight: ${person.weight}\n`
-    personInfo += `Eye Color: ${person.eyeColor}\n`
-    personInfo += `Occupation: ${person.occipation}\n`
+    personInfo += `Gender: ${person.gender}\n`;
+    personInfo += `DoB: ${person.dob}\n`;
+    personInfo += `Height: ${person.height}\n`;
+    personInfo += `Weight: ${person.weight}\n`;
+    personInfo += `Eye Color: ${person.eyeColor}\n`;
+    personInfo += `Occupation: ${person.occipation}\n`;
+    personInfo += `id: ${person.id}\n`;
     //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
     alert(personInfo);
 }
@@ -190,3 +191,25 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+
+function findPersonFamily (person) {
+    let familyInfo = `Parents: ${person.parents}`;
+    familyInfo += `Spouse: ${person.currentSpouse}`;
+    familyInfo += 'Dedcendants: ';
+
+    alert(familyInfo);
+}
+
+
+
+function findPersonDescendants ()
+
+
+
+
+
+
+
+
+
+
