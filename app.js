@@ -79,7 +79,7 @@ function mainMenu(person, people) {
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
+            displayPeople(personDescendants,"Descendants");
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -121,11 +121,12 @@ function searchByName(people) {
  * to the user in the form of an alert().
  * @param {Array} people        A collection of person objects.
  */
-function displayPeople(people) {
+// type will be a string that prints out with the name, this is used to display relationshipts
+function displayPeople(people, type) { 
     alert(
         people
             .map(function (person) {
-                return `${person.firstName} ${person.lastName}`;
+                return `${type}: ${person.firstName} ${person.lastName}`;
             })
             .join("\n")
     );
@@ -193,23 +194,28 @@ function chars(input) {
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
 function findPersonFamily (person) {
-    let familyInfo = `Parents: ${person.parents}`;
-    familyInfo += `Spouse: ${person.currentSpouse}`;
+    let familyInfo = `Parents: ${person.parents}\n`;
+    familyInfo += `Spouse: ${person.currentSpouse}\n`;
     familyInfo += 'Dedcendants: ';
 
-    alert(familyInfo);
+    return familyInfo;
 }
 
 
 
-function findPersonDescendants ()
+function findPersonDescendants (person, people, descendants=[]){
+    let array = people.filter(function (el){
+        return el.parents.includes(person.id);
+    });
+if(array.length === 0) return [person]
 
+descendants = [...descendants,...array];
 
+array.forEach((person) =>{
+    descendants = [...descendants, ...findPersonDescendants(person, people)]
+});
 
-
-
-
-
-
-
+return descendants;
+};
+    
 
