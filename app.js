@@ -195,34 +195,57 @@ function chars(input) {
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
 function findPersonFamily(person, people) {
-    // add other 2 calls here for siblings and spouse
+  // add other 2 calls here for siblings and spouse
   let parents = findParents(person, people);
-  let personFamily = parents + "\n"    // example next we would add + spouse + "\n"
-  return personFamily
-  
+  let spouse = findSpouse(person, people);
+  let personFamily = parents + "\n" + spouse + "\n";  // example next we would add + spouse + "\n"
+  return personFamily;
+
 }
 
-function findParents(person, people){
-    let personParentsIds = person.parents;
-    let personParentsFullNames = "";
-    let personParentsInfo = [];
+function findSpouse(person, people) {
+  let personSpouseIds = person.currentSpouse;
+  let personSpouseFullName = "";
+  let personCurrentSpouseInfo = []
 
-    if(personParentsIds[0]=== undefined){
-        personParentsFullNames = "\nNo record of parents information"
-    }else{
-        for(let i = 0; i < personParentsIds.length; i++){ // for loop needed to look for both parents
-            let personParent = people.filter(function(person){
-                if(person.id === personParentsIds[i]){
-                    return true;
-                }
-            })
-            personParentsInfo = [...personParentsInfo, ...personParent];
+  if (personSpouseIds === undefined) {
+    personSpouseFullName = "\nNo record of spouse information";
+  } else {
+    let personSpouse = people.filter(function (person) {
+      if (person.id === person.personSpouseIds) {
+        return true;
+      }
+    })
+    personCurrentSpouseInfo = [...personCurrentSpouseInfo, ...personSpouse];
+  }
+  for (let i = 0; i < personCurrentSpouseInfo.length; i++) {
+    personSpouseFullName += `${person.firstName} ${person.lastName} spouse ${i + 1} full name: ${personCurrentSpouseInfo.firstName} ${personCurrentSpouseInfo.lastName}\n`
+  }
+  return personSpouseFullName;
+
+}
+
+function findParents(person, people) {
+  let personParentsIds = person.parents;
+  let personParentsFullNames = "";
+  let personParentsInfo = [];
+
+  if (personParentsIds[0] === undefined) {
+    personParentsFullNames = "\nNo record of parents information"
+  } else {
+    for (let i = 0; i < personParentsIds.length; i++) { // for loop needed to look for both parents
+      let personParent = people.filter(function (person) {
+        if (person.id === personParentsIds[i]) {
+          return true;
         }
-        for (let i = 0; i < personParentsInfo.length; i++){ // loops through results to turn into stirngs
-            personParentsFullNames += `${person.firstName} ${person.lastName} parent ${i+1} full name: ${personParentsInfo[i].firstName} ${personParentsInfo[i].lastName} \n`
-        }
+      })
+      personParentsInfo = [...personParentsInfo, ...personParent];
     }
-    return personParentsFullNames;
+    for (let i = 0; i < personParentsInfo.length; i++) { // loops through results to turn into stirngs
+      personParentsFullNames += `${person.firstName} ${person.lastName} parent ${i + 1} full name: ${personParentsInfo[i].firstName} ${personParentsInfo[i].lastName} \n`
+    }
+  }
+  return personParentsFullNames;
 }
 
 
@@ -249,11 +272,9 @@ function findPersonDescendants(person, people) {
     personDescendantsFullNames = `${person.firstName} ${person.lastname} doesn't have any descendants\n`;
   } else {
     for (let i = 0; i < personDescendant.length; i++) {
-      personDescendantsFullNames += `${person.firstname} ${person.lastName} ${
-        i + 1
-      } descendant: ${personDescendant[i].firstName} ${
-        personDescendant[i].lastName
-      }\n`;
+      personDescendantsFullNames += `${person.firstname} ${person.lastName} ${i + 1
+        } descendant: ${personDescendant[i].firstName} ${personDescendant[i].lastName
+        }\n`;
     }
   }
   return personDescendantsFullNames;
