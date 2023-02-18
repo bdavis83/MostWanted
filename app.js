@@ -197,32 +197,8 @@ function chars(input) {
 function findPersonFamily(person, people) {
   // add other 2 calls here for siblings and spouse
   let parents = findParents(person, people);
-  let spouse = findSpouse(person, people);
-  let personFamily = parents + "\n" + spouse + "\n";  // example next we would add + spouse + "\n"
+  let personFamily = parents + "\n"; // example next we would add + spouse + "\n"
   return personFamily;
-
-}
-
-function findSpouse(person, people) {
-  let personSpouseIds = person.currentSpouse;
-  let personSpouseFullName = "";
-  let personCurrentSpouseInfo = []
-
-  if (personSpouseIds === undefined) {
-    personSpouseFullName = "\nNo record of spouse information";
-  } else {
-    let personSpouse = people.filter(function (person) {
-      if (person.id === person.personSpouseIds) {
-        return true;
-      }
-    })
-    personCurrentSpouseInfo = [...personCurrentSpouseInfo, ...personSpouse];
-  }
-  for (let i = 0; i < personCurrentSpouseInfo.length; i++) {
-    personSpouseFullName += `${person.firstName} ${person.lastName} spouse ${i + 1} full name: ${personCurrentSpouseInfo.firstName} ${personCurrentSpouseInfo.lastName}\n`
-  }
-  return personSpouseFullName;
-
 }
 
 function findParents(person, people) {
@@ -231,24 +207,28 @@ function findParents(person, people) {
   let personParentsInfo = [];
 
   if (personParentsIds[0] === undefined) {
-    personParentsFullNames = "\nNo record of parents information"
+    personParentsFullNames = "\nNo record of parents information";
   } else {
-    for (let i = 0; i < personParentsIds.length; i++) { // for loop needed to look for both parents
+    for (let i = 0; i < personParentsIds.length; i++) {
+      // for loop needed to look for both parents
       let personParent = people.filter(function (person) {
         if (person.id === personParentsIds[i]) {
           return true;
         }
-      })
+      });
       personParentsInfo = [...personParentsInfo, ...personParent];
     }
-    for (let i = 0; i < personParentsInfo.length; i++) { // loops through results to turn into stirngs
-      personParentsFullNames += `${person.firstName} ${person.lastName} parent ${i + 1} full name: ${personParentsInfo[i].firstName} ${personParentsInfo[i].lastName} \n`
+    for (let i = 0; i < personParentsInfo.length; i++) {
+      // loops through results to turn into stirngs
+      personParentsFullNames += `${person.firstName} ${
+        person.lastName
+      } parent ${i + 1} full name: ${personParentsInfo[i].firstName} ${
+        personParentsInfo[i].lastName
+      } \n`;
     }
   }
   return personParentsFullNames;
 }
-
-
 
 // this example grabs the entire object and returns them
 // function findParents(person, people) {
@@ -272,10 +252,31 @@ function findPersonDescendants(person, people) {
     personDescendantsFullNames = `${person.firstName} ${person.lastname} doesn't have any descendants\n`;
   } else {
     for (let i = 0; i < personDescendant.length; i++) {
-      personDescendantsFullNames += `${person.firstname} ${person.lastName} ${i + 1
-        } descendant: ${personDescendant[i].firstName} ${personDescendant[i].lastName
-        }\n`;
+      personDescendantsFullNames += `${person.firstname} ${person.lastName} ${
+        i + 1
+      } descendant: ${personDescendant[i].firstName} ${
+        personDescendant[i].lastName
+      }\n`;
     }
   }
   return personDescendantsFullNames;
+}
+
+function searchByTraits(people) {
+  let userInputProp = promptFor("Enter trait: ");
+  let userInputVal = promptFor("Enter trait value: ");
+  let foundItems = people.filter(function (el) {
+    try {
+      if (el[userInputProp].includes(userInputVal)) {
+        return true;
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      if (el[userInputProp] === userInputVal) {
+        return true;
+      }
+    }
+  });
+  return foundItems;
 }
