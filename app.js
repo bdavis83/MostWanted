@@ -342,3 +342,20 @@ function getGender(people){
   return foundGender;
 }
 
+function getHeight (people){
+  let heightInput = promptFor("Enter height");
+  let foundHeight = people.filter (function(el){
+    if (el.height.includes(parseInt(heightInput)));
+    return true;
+  });
+  return foundHeight
+}
+function getWeight (people){
+  let weightInput = promptFor("Enter weight");
+  let foundWeight = people.filter (function(el){
+    if (el.weight.includes(parseInt(weightInput)));
+    return true;
+  });
+  return foundWeight;
+}
+
