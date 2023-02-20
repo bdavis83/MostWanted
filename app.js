@@ -197,7 +197,9 @@ function chars(input) {
 function findPersonFamily(person, people) {
   // add other 2 calls here for siblings and spouse
   let parents = findParents(person, people);
-  let personFamily = parents + "\n"; // example next we would add + spouse + "\n"
+  let spouse = findPersonSpouse (person, people);
+  let siblings = findPersonSiblings(person, people);
+  let personFamily = parents + "\n" + spouse + "\n" + siblings + "\n"; // example next we would add + spouse + "\n"
   return personFamily;
 }
 
@@ -230,6 +232,44 @@ function findParents(person, people) {
   return personParentsFullNames;
 }
 
+function findPersonSiblings (person, people){
+  let personParentsIds = person.parents;
+  let personSiblingInfo = [];
+  let personSiblingFullNames = "";
+  
+  let siblings = people.filter(function(el){
+    for (let i = 0; i < personParentsIds.length; i++) {
+      if(el.parents.includes(person.parents[i])){
+        return true;
+      }
+    }
+  });
+  personSiblingInfo = [...personSiblingInfo, ...siblings];
+  for (let i = 0; i < personSiblingInfo.length; i++){
+    personSiblingFullNames += `${personSiblingInfo[i].firstName} ${personSiblingInfo[i].lastName}\n`
+  }
+  return personSiblingFullNames;
+  }
+
+function findPersonSpouse(person, people) {
+  let personCurrentSpouseId = person.currentSpouse;
+  let spouseFullName = "";
+  let spouseInfo = [];
+ 
+
+  if (personCurrentSpouseId === undefined) {
+    return "No Spouse Found";
+} else {
+  spouseInfo = people.filter(function(el){
+    if (el.id === personCurrentSpouseId) {
+      return true;
+    }
+  });
+  }
+  personCurrentSpouseId = spouseInfo.pop()
+  spouseFullName = personCurrentSpouseId.firstName + ' ' + personCurrentSpouseId.lastName;
+  return spouseFullName
+}
 // this example grabs the entire object and returns them
 // function findParents(person, people) {
 //     let foundPerson = people.filter(function(el){
@@ -261,6 +301,8 @@ function findPersonDescendants(person, people) {
   }
   return personDescendantsFullNames;
 }
+
+
 
 function searchByTraits(people) {
   let userInputProp = promptFor("Enter trait: ");
