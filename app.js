@@ -322,3 +322,23 @@ function searchByTraits(people) {
   });
   return foundItems;
 }
+
+function getEyecColor (people){
+  let eyeColorInput = promptFor("Enter Eye Color");
+  let foundEyecolor = people.filter(function(el){
+    if (el.eyeColor.includes(eyeColorInput)){
+      return true;
+    }
+  });
+  return foundEyecolor;
+}
+
+function getGender(people){
+  let genderInput = promptFor("ENter Gender");
+  let foundGender = people.filter (function(el){
+    if (el.gender.includes(genderInput));
+    return true;
+  });
+  return foundGender;
+}
+
