@@ -302,79 +302,63 @@ function findPersonDescendants(person, people) {
   return personDescendantsFullNames;
 }
 
-// function searchByTraits(people) {
-//   let filteredResults = people;
-//   let userInputProp = prompt("Enter trait: ");
-//   if (userInputProp === "eyeColor") {
-//     filteredResults = getEyecColor(filteredResults);
-//   } else if (userInputProp === "gender") {
-//     filteredResults = getGender(filteredResults);
-//   } else if (userInputProp === "height") {
-//     filteredResults = getHeight(filteredResults);
-//   } else if (userInputProp === "weight") {
-//     filteredResults = getWeight(filteredResults);
-//   }
 
-//   {
-//     return filteredResults;
-//   }
+
+// function getEyecColor(people) {
+//   let eyeColorInput = prompt("Enter Eye Color");
+//   let foundEyecolor = people.filter(function (el) {
+//     if (el.eyeColor.includes(eyeColorInput)) {
+//       return true;
+//     }
+//   });
+//   console.log(foundEyecolor);
+//   return foundEyecolor;
 // }
 
-function getEyecColor(people) {
-  let eyeColorInput = prompt("Enter Eye Color");
-  let foundEyecolor = people.filter(function (el) {
-    if (el.eyeColor.includes(eyeColorInput)) {
-      return true;
-    }
-  });
-  console.log(foundEyecolor);
-  return foundEyecolor;
-}
+// function getGender(people) {
+//   let genderInput = prompt("ENter Gender");
+//   let foundGender = people.filter(function (el) {
+//     if (el.gender.includes(genderInput));
+//     return true;
+//   });
+//   return foundGender;
+// }
 
-function getGender(people) {
-  let genderInput = prompt("ENter Gender");
-  let foundGender = people.filter(function (el) {
-    if (el.gender.includes(genderInput));
-    return true;
-  });
-  return foundGender;
-}
+// function getHeight(people) {
+//   let heightInput = prompt("Enter height");
+//   let foundHeight = people.filter(function (el) {
+//     if (el.height.includes(parseInt(heightInput)));
+//     return true;
+//   });
+//   return foundHeight;
+// }
 
-function getHeight(people) {
-  let heightInput = prompt("Enter height");
-  let foundHeight = people.filter(function (el) {
-    if (el.height.includes(parseInt(heightInput)));
-    return true;
-  });
-  return foundHeight;
-}
+// function getWeight(people) {
+//   let weightInput = prompt("Enter weight");
+//   let foundWeight = people.filter(function (el) {
+//     if (el.weight.includes(parseInt(weightInput)));
+//     return true;
+//   });
+//   return foundWeight;
+// }
 
-function getWeight(people) {
-  let weightInput = prompt("Enter weight");
-  let foundWeight = people.filter(function (el) {
-    if (el.weight.includes(parseInt(weightInput)));
-    return true;
-  });
-  return foundWeight;
-}
+// function getDob(people) {
+//   let personDobInput = prompt("Enter DoB");
+//   let foundDob = people.filter(function (el) {
+//     if (el.dob.includes(personDobInput));
+//     return true;
+//   });
+//   return foundDob;
+// }
 
-function getDob(people) {
-  let personDobInput = prompt("Enter DoB");
-  let foundDob = people.filter(function (el) {
-    if (el.dob.includes(personDobInput));
-    return true;
-  });
-  return foundDob;
-}
-
-function getOccupation (people){
-  let personOccupationInput = prompt('Enter Occupation')
-  let foundPersonOccupation = people.filter(function(el){
-    if (el.occupation.includes(personOccupationInput));
-    return true
-  });
-  return foundPersonOccupation;
-}
+// function getOccupation (people){
+//   let personOccupationInput = prompt('Enter Occupation')
+//   let foundPersonOccupation = people.filter(function(el){
+//     if (el.occupation.includes(personOccupationInput));
+//     return true
+//   });
+//   return foundPersonOccupation;
+// }
 
 function searchByTraits (people){
   let userInputProp = prompt ("Enter a property to search for ");
@@ -394,3 +378,4 @@ function searchByTraits (people){
   if (foundList.length === 0) return searchByTraits(people);
   if (foundList.length > 1) return searchByTraits (foundList);
 }
+
