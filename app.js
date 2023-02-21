@@ -365,14 +365,14 @@ function searchByTraits (people){
   let userInputVal = prompt ("Enter value of property ")
   let foundList = people.filter(function(el){
     try { 
-      return (el[userInputProp].includes(userInputVal)) 
+      return (el[userInputProp] == userInputVal) 
     }
     catch (error) {
       console.log (error)
     }
-    finally {
-      return (el[userInputProp]===parseInt(userInputVal))
-    }
+    // finally {
+    //   return (el[userInputProp]===parseInt(userInputVal))
+    // }
   });
   if (foundList.length === 1) return foundList;
   if (foundList.length === 0) return searchByTraits(people);
