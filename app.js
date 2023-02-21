@@ -197,7 +197,7 @@ function chars(input) {
 function findPersonFamily(person, people) {
   // add other 2 calls here for siblings and spouse
   let parents = findParents(person, people);
-  let spouse = findPersonSpouse (person, people);
+  let spouse = findPersonSpouse(person, people);
   let siblings = findPersonSiblings(person, people);
   let personFamily = parents + "\n" + spouse + "\n" + siblings + "\n"; // example next we would add + spouse + "\n"
   return personFamily;
@@ -232,43 +232,43 @@ function findParents(person, people) {
   return personParentsFullNames;
 }
 
-function findPersonSiblings (person, people){
+function findPersonSiblings(person, people) {
   let personParentsIds = person.parents;
   let personSiblingInfo = [];
   let personSiblingFullNames = "";
-  
-  let siblings = people.filter(function(el){
+
+  let siblings = people.filter(function (el) {
     for (let i = 0; i < personParentsIds.length; i++) {
-      if(el.parents.includes(person.parents[i])){
+      if (el.parents.includes(person.parents[i])) {
         return true;
       }
     }
   });
   personSiblingInfo = [...personSiblingInfo, ...siblings];
-  for (let i = 0; i < personSiblingInfo.length; i++){
-    personSiblingFullNames += `${personSiblingInfo[i].firstName} ${personSiblingInfo[i].lastName}\n`
+  for (let i = 0; i < personSiblingInfo.length; i++) {
+    personSiblingFullNames += `${personSiblingInfo[i].firstName} ${personSiblingInfo[i].lastName}\n`;
   }
   return personSiblingFullNames;
-  }
+}
 
 function findPersonSpouse(person, people) {
   let personCurrentSpouseId = person.currentSpouse;
   let spouseFullName = "";
   let spouseInfo = [];
- 
 
   if (personCurrentSpouseId === undefined) {
     return "No Spouse Found";
-} else {
-  spouseInfo = people.filter(function(el){
-    if (el.id === personCurrentSpouseId) {
-      return true;
-    }
-  });
+  } else {
+    spouseInfo = people.filter(function (el) {
+      if (el.id === personCurrentSpouseId) {
+        return true;
+      }
+    });
   }
-  personCurrentSpouseId = spouseInfo.pop()
-  spouseFullName = personCurrentSpouseId.firstName + ' ' + personCurrentSpouseId.lastName;
-  return spouseFullName
+  personCurrentSpouseId = spouseInfo.pop();
+  spouseFullName =
+    personCurrentSpouseId.firstName + " " + personCurrentSpouseId.lastName;
+  return spouseFullName;
 }
 // this example grabs the entire object and returns them
 // function findParents(person, people) {
@@ -302,60 +302,76 @@ function findPersonDescendants(person, people) {
   return personDescendantsFullNames;
 }
 
-
-
 function searchByTraits(people) {
-  let userInputProp = promptFor("Enter trait: ");
-  let userInputVal = promptFor("Enter trait value: ");
-  let foundItems = people.filter(function (el) {
-    try {
-      if (el[userInputProp].includes(userInputVal)) {
-        return true;
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      if (el[userInputProp] === userInputVal) {
-        return true;
-      }
-    }
-  });
-  return foundItems;
+  let filteredResults = people;
+  let userInputProp = prompt("Enter trait: ");
+  if (userInputProp === "eyeColor") {
+    filteredResults = getEyecColor(filteredResults);
+  } else if (userInputProp === "gender") {
+    filteredResults = getGender(filteredResults);
+  } else if (userInputProp === "height") {
+    filteredResults = getHeight(filteredResults);
+  } else if (userInputProp === "weight") {
+    filteredResults = getWeight(filteredResults);
+  }
+
+  {
+    return filteredResults;
+  }
 }
 
-function getEyecColor (people){
-  let eyeColorInput = promptFor("Enter Eye Color");
-  let foundEyecolor = people.filter(function(el){
-    if (el.eyeColor.includes(eyeColorInput)){
+function getEyecColor(people) {
+  let eyeColorInput = prompt("Enter Eye Color");
+  let foundEyecolor = people.filter(function (el) {
+    if (el.eyeColor.includes(eyeColorInput)) {
       return true;
     }
   });
+  console.log(foundEyecolor);
   return foundEyecolor;
 }
 
-function getGender(people){
-  let genderInput = promptFor("ENter Gender");
-  let foundGender = people.filter (function(el){
+function getGender(people) {
+  let genderInput = prompt("ENter Gender");
+  let foundGender = people.filter(function (el) {
     if (el.gender.includes(genderInput));
     return true;
   });
   return foundGender;
 }
 
-function getHeight (people){
-  let heightInput = promptFor("Enter height");
-  let foundHeight = people.filter (function(el){
+function getHeight(people) {
+  let heightInput = prompt("Enter height");
+  let foundHeight = people.filter(function (el) {
     if (el.height.includes(parseInt(heightInput)));
     return true;
   });
-  return foundHeight
+  return foundHeight;
 }
-function getWeight (people){
-  let weightInput = promptFor("Enter weight");
-  let foundWeight = people.filter (function(el){
+
+function getWeight(people) {
+  let weightInput = prompt("Enter weight");
+  let foundWeight = people.filter(function (el) {
     if (el.weight.includes(parseInt(weightInput)));
     return true;
   });
   return foundWeight;
 }
 
+function getDob(people) {
+  let personDobInput = prompt("Enter DoB");
+  let foundDob = people.filter(function (el) {
+    if (el.dob.includes(personDobInput));
+    return true;
+  });
+  return foundDob;
+}
+
+function getOccupation (people){
+  let personOccupationInput = prompt('Enter Occupation')
+  let foundPersonOccupation = people.filter(function(el){
+    if (el.occupation.includes(personOccupationInput));
+    return true
+  });
+  return foundPersonOccupation;
+}
