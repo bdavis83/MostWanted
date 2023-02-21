@@ -302,23 +302,23 @@ function findPersonDescendants(person, people) {
   return personDescendantsFullNames;
 }
 
-function searchByTraits(people) {
-  let filteredResults = people;
-  let userInputProp = prompt("Enter trait: ");
-  if (userInputProp === "eyeColor") {
-    filteredResults = getEyecColor(filteredResults);
-  } else if (userInputProp === "gender") {
-    filteredResults = getGender(filteredResults);
-  } else if (userInputProp === "height") {
-    filteredResults = getHeight(filteredResults);
-  } else if (userInputProp === "weight") {
-    filteredResults = getWeight(filteredResults);
-  }
+// function searchByTraits(people) {
+//   let filteredResults = people;
+//   let userInputProp = prompt("Enter trait: ");
+//   if (userInputProp === "eyeColor") {
+//     filteredResults = getEyecColor(filteredResults);
+//   } else if (userInputProp === "gender") {
+//     filteredResults = getGender(filteredResults);
+//   } else if (userInputProp === "height") {
+//     filteredResults = getHeight(filteredResults);
+//   } else if (userInputProp === "weight") {
+//     filteredResults = getWeight(filteredResults);
+//   }
 
-  {
-    return filteredResults;
-  }
-}
+//   {
+//     return filteredResults;
+//   }
+// }
 
 function getEyecColor(people) {
   let eyeColorInput = prompt("Enter Eye Color");
@@ -374,4 +374,23 @@ function getOccupation (people){
     return true
   });
   return foundPersonOccupation;
+}
+
+function searchByTraits (people){
+  let userInputProp = prompt ("Enter a property to search for ");
+  let userInputVal = prompt ("Enter value of property ")
+  let foundList = people.filter(function(el){
+    try { 
+      return (el[userInputProp].includes(userInputVal)) 
+    }
+    catch (error) {
+      console.log (error)
+    }
+    finally {
+      return (el[userInputProp]===parseInt(userInputVal))
+    }
+  });
+  if (foundList.length === 1) return foundList;
+  if (foundList.length === 0) return searchByTraits(people);
+  if (foundList.length > 1) return searchByTraits (foundList);
 }
